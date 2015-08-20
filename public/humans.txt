@@ -1,0 +1,18 @@
+/* TEAM */
+	Chef: Rahul Kadyan
+	Site: http://znck.me
+	Twitter: @rahulkadyan7
+	From: Breve Labs, Bengaluru, India
+
+	Database designer: Somya Anand
+	Github: somya-anand
+	From: IIT Guwahati
+
+	API developer: Mohit Bhatia
+	Twitter: @anand_somya
+	From: IIT Guwahati
+
+	Web designer: Suwardhan Ahirrao
+	Site: http://suwardhan.com
+	Twitter: @Suwardhan
+	From: Breve Labs, Bengaluru, India

@@ -1,0 +1,23 @@
+@import "pallete";
+
+//Fonts
+$btn-font-weight: 200;
+$font-family-sans-serif: "Courier", monospace;
+
+//Colors
+$brand-primary: $palette-darker;
+$brand-success: $palette-light;
+$brand-info: $palette-lighter;
+$brand-warning: $palette-dark;
+$brand-danger: $palette-normal;
+$input-border-focus: $palette-darker;
+
+$border-radius-base: 0;
+$border-radius-large: 0;
+$border-radius-small: 0;
+
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "welcome-page";
+@import "well";
+@import "panel";
+@import "quote";

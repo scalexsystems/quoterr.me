@@ -1,0 +1,157 @@
+.page {
+  z-index: 0;
+  position: relative;
+  min-height: 100vh;
+  background-size: 100% 100%;
+  background-size: cover;
+  background: no-repeat center center;
+}
+
+.quote-arena {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 18.22916667vh;
+  padding-bottom: 18.22916667vh;
+  blockquote {
+    position: relative;
+    height: 63.541vh;
+    border: none;
+    padding: 0 80px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    p {
+      color: $palette-darker;
+      font-size: 14px;
+      @media (min-width: $screen-sm-min) {
+        font-size: 18px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 30px;
+      }
+    }
+
+    footer {
+      font-size: 13px;
+      @media (min-width: $screen-sm-min) {
+        font-size: 16px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 18px;
+      }
+      color: $palette-light-dark;
+    }
+    &:before {
+      //border-radius: 4px;
+      z-index: -1;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: $palette-lighter;
+      opacity: 0.95;
+    }
+  }
+}
+
+.quote-help {
+  color: $palette-lighter;
+  a {
+    color: $palette-lighter;
+    &:hover {
+      color: $palette-lighter;
+    }
+  }
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 11;
+}
+
+.quote-menu {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  top: 0;
+  left: 0;
+  padding: 15px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0));
+  #collapse {
+
+  }
+}
+
+a.link-white {
+  color: $palette-lighter;
+  &:hover {
+    color: $palette-lighter;
+  }
+}
+
+.btn-round {
+  margin: 7.5px;
+  box-shadow: 0 0 1px 0 $palette-lighter;
+  color: $palette-lighter;
+  display: inline-block;
+  line-height: 34px;
+  text-align: center;
+  height: 36px;
+  width: 36px;
+  border-radius: 1000px;
+  border: 1px solid $palette-lighter;
+  &:visited, &:focus {
+    color: $palette-lighter;
+  }
+  &:hover {
+    background: $palette-lighter;
+    border-color: $palette-lighter;
+    color: $palette-darker;
+  }
+}
+
+.btn-menu {
+  background: $palette-lighter;
+  border-color: $palette-lighter;
+  color: $palette-darker;
+  .bars {
+    display: none;
+  }
+  .times {
+    display: inline-block;
+  }
+  &:visited, &:focus {
+    color: $palette-darker;
+  }
+  &.collapsed {
+    background: transparent;
+    color: $palette-lighter;
+    &:hover {
+      background: $palette-lighter;
+      border-color: $palette-lighter;
+      color: $palette-darker;
+    }
+    .bars {
+      display: inline-block;
+    }
+    .times {
+      display: none;
+    }
+  }
+}
+
+a.text-link {
+  color: inherit;
+}
+
+.login {
+  background: $palette-lighter;
+  padding: 32px 16px;
+  margin: -15px;
+}

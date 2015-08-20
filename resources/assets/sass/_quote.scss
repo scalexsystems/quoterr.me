@@ -1,0 +1,15 @@
+.quote {
+  border: none;
+  p {
+    color: $palette-darker;
+    span.highlight {
+      background: $palette-darker;
+      color: $palette-lighter;
+      padding: 0 3px;
+    }
+  }
+
+  footer {
+    color: $palette-light-dark;
+  }
+}

@@ -1,0 +1,16 @@
+.panel-light {
+  @include panel-variant(darken($palette-lighter, 1.2), $palette-darker, $palette-lighter, darken($palette-lighter, 1.2));
+}
+
+.panel-link {
+  display: inline-block;
+  width: 48%;
+}
+
+.panel-link-wide {
+  display: inline-block;
+  width: 48%;
+  @media (min-width: $screen-sm-min) {
+    width: 24%;
+  }
+}

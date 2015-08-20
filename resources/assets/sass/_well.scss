@@ -1,0 +1,8 @@
+.quoterr-well {
+  background: $palette-lighter;
+  border: 1px solid $palette-lighter;
+  padding: 24px;
+  @media (min-width: $screen-sm-min) {
+    padding: 48px;
+  }
+}
