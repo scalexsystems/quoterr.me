@@ -50,7 +50,7 @@
                 <div class="panel panel-light">
                     <div class="panel-heading">
                         Authors <div class="pull-right">
-                            <a href="#" class="text-link">view all</a>
+                            <a href="{{ route('author.index') }}" class="text-link">view all</a>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -70,26 +70,26 @@
         </div>
     </div>
     <br>
-    @if(count($quotes))
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    @foreach($quotes as $quote)
-                        <div class="quoterr-well">
-                            <blockquote class="quote" cite="">
-                                <div style="width: 100%">
-                                    <p v-html="quote.content">{!!  $quote->content !!}</p>
-                                    <footer class="text-right"><a href="{{ route('home', $quote->author->slug) }}" class="text-link" v-text="quote.author.name">{{ $quote->author->name }}</a></footer>
-                                </div>
-                            </blockquote>
-                        </div>
-                        <br>
-                    @endforeach
-                </div>
-                <div class="col-xs-12 text-center">
-                    {!! $quotes->render() !!}
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                @forelse($quotes as $quote)
+                    <div class="quoterr-well">
+                        <blockquote class="quote" cite="">
+                            <div style="width: 100%">
+                                <p v-html="quote.content">{!!  $quote->content !!}</p>
+                                <footer class="text-right"><a href="{{ route('home', $quote->author->slug) }}" class="text-link" v-text="quote.author.name">{{ $quote->author->name }}</a></footer>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <br>
+                @empty
+                    <h2 class="text-center">No results</h2>
+                @endforelse
+            </div>
+            <div class="col-xs-12 text-center">
+                {!! $quotes->render() !!}
             </div>
         </div>
-    @endif
+    </div>
 @endsection

@@ -4,6 +4,12 @@
     <link rel="stylesheet" href="{{ asset('css/nprogress.css') }}">
 @endsection
 
+
+@section('header')
+@endsection
+@section('footer')
+@endsection
+
 @section('content')
     <div class="page" id="vue-arena" v-on="keyup: next | key 'space'">
         <div class="quote-help">
@@ -29,6 +35,9 @@
         </div>
 
         <div class="quote-menu text-right">
+            <div class="pull-left">
+                <img src="{{ asset('img/logo-no-shadow.svg') }}" alt="Quoterr">
+            </div>
             <div id="collapse" style="display: inline-block; overflow: hidden; white-space: nowrap">
                 <a href="#" class="btn-round btn-menu collapsed" type="button" id="menu-toggle" aria-expanded="false" aria-controls="collapseExample" title="Toggle Menu">
                     <i class="fa fa-bars bars"></i>
@@ -43,18 +52,22 @@
                 <a href="#" class="btn-round hidden-xs" role="button" data-toggle="tooltip" title="Fullscreen" id="screen-full">
                     <i class="fa fa-expand"></i>
                 </a>
-                <a href="{{ route('quote.create') }}" class="btn-round hidden-xs" data-toggle="tooltip" title="Add a quote" role="button">
-                    <i class="fa fa-plus"></i>
-                </a>
-                <a href="{{ route('quote.index') }}" class="btn-round" data-toggle="tooltip" title="Search" role="button">
-                    <i class="fa fa-search"></i>
-                </a>
+                <span data-toggle="modal" data-target="#add-modal">
+                    <a href="#" class="btn-round hidden-xs" data-toggle="tooltip" title="Add a quote" role="button">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </span>
+                <span data-toggle="modal" data-target="#search-modal">
+                    <a href="#" class="btn-round" data-toggle="tooltip" title="Search" role="button">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </span>
                 @if(Auth::check())
                     <a href="{{ route('logout') }}" class="btn-round" role="button" data-toggle="tooltip" title="Logout">
                         <i class="fa fa-sign-out"></i>
                     </a>
                 @else
-                    <span data-toggle="modal" data-target="#login-modal">
+                    <span data-toggle="modal" data-target="#add-modal">
                         <a href="#" class="btn-round" role="button" data-toggle="tooltip" title="Login">
                             <i class="fa fa-sign-in"></i>
                         </a>
@@ -97,6 +110,63 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <div class="modal fade" id="add-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Add new quotes</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="login text-center">
+                        <h2>
+                            Coming soon.
+                        </h2><br>
+                        <footer>
+                            <small>
+                                If you are a developer, then you help us out at <br>
+                                <a href="https://github.com/the-quoterr/quoterr.me">https://github.com/the-quoterr/quoterr.me</a>
+                            </small>
+                        </footer>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div class="modal fade" id="search-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Find quotes</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="login text-center">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="quoterr-well">
+                                    {!! Form::open(['route' => 'quote.index', 'method' => 'get']) !!}
+                                    <div class="form-group" style="margin-bottom: 0">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="q" placeholder="search any quotes, authors or categories">
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-primary" value="search">
+                    </span>
+                                        </div>
+                                    </div>
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 @endsection
 
 @section('body.js')

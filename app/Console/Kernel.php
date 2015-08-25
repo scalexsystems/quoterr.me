@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\QuotesFromJson::class,
+        Commands\ExportQuotes::class,
+        Commands\CreateBot::class,
     ];
 
     /**

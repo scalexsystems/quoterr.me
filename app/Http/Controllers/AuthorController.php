@@ -4,6 +4,7 @@ namespace Quoterr\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Quoterr\Author;
 use Quoterr\Http\Requests;
 use Quoterr\Http\Controllers\Controller;
 
@@ -16,7 +17,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::orderBy('name')->paginate(100);
+
+        return view('author.index', compact('authors'));
     }
 
     /**

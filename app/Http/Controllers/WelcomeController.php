@@ -26,6 +26,7 @@ class WelcomeController extends Controller
         if ($query !== null) {
             if (Uuid::isValid($query)) {
                 $type = 'Press ‘space’ for next Quote';
+                flash('Copy link from address bar to share this quote.');
                 $quote = Quote::whereUuid($query)->first();
             } else {
                 $author = Author::whereSlug($query)->first();

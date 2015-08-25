@@ -16,7 +16,8 @@
     "doctrine/dbal": "~2.3",
     "dingo/api": ">0.1",
     "salsify/json-streaming-parser": "~4.0",
-    "laravelcollective/html": "~5.0"
+    "laravelcollective/html": "~5.0",
+    "znck/flash": "~1.2"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

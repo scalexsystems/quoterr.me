@@ -141,6 +141,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Znck\Flash\FlashServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------

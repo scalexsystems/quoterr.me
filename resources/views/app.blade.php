@@ -1,3 +1,9 @@
+@section('header')
+        @include('partial.header')
+@endsection
+@section('footer')
+        @include('partial.footer')
+@endsection
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +19,7 @@
     <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     @yield('css')
+    <style>.alert{ margin-bottom: 0}</style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,15 +29,12 @@
     <![endif]-->
 </head>
 <body>
-@if (session('flash_notification'))
-    <div class="row">
-        <div class="col-xs-12">
-            @include('flash::notifications')
-        </div>
-    </div>
-@endif
+@yield('header')
+@include('znck::flash.notifications')
 
 @yield('content')
+@yield('footer')
+
 <script src="{{ asset('js/jquery.js') }}"></script>
 <script src="{{ asset('js/bootstrap.js') }}"></script>
 @yield('js')

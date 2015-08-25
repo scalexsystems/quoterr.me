@@ -5,9 +5,8 @@ namespace Quoterr\Console\Commands;
 use Illuminate\Console\Command;
 use Quoterr\Author;
 use Quoterr\Helpers\StreamingJsonListener;
-use Quoterr\Helpers\TagExtractor;
 use Quoterr\Quote;
-use Quoterr\Tag;
+use Quoterr\User;
 use Symfony\Component\Console\Input\InputArgument;
 
 class QuotesFromJson extends Command
@@ -32,17 +31,132 @@ class QuotesFromJson extends Command
      */
     protected $tagExtractor;
 
-    protected $classes = [];
+    protected $user;
+
+    protected $ignore = [
+        'age',
+        'amazing',
+        'anger',
+        'anniversary',
+        'architecture',
+        'art',
+        'attitude',
+        'beauty',
+        'best',
+        'birthday',
+        'business',
+        'car',
+        'change',
+        'christmas',
+        'communication',
+        'computers',
+        'cool',
+        'courage',
+        'dad',
+        'dating',
+        'death',
+        'design',
+        'diet',
+        'dreams',
+        'easter',
+        'education',
+        'environmental',
+        'equality',
+        'experience',
+        'failure',
+        'faith',
+        'family',
+        'famous',
+        'fear',
+        'finance',
+        'fitness',
+        'food',
+        'forgiveness',
+        'freedom',
+        'friendship',
+        'funny',
+        'future',
+        'gardening',
+        'god',
+        'good',
+        'government',
+        'graduation',
+        'greatness',
+        'happiness',
+        'health',
+        'history',
+        'home',
+        'hope',
+        'humor',
+        'imagination',
+        'inspirational',
+        'intelligence',
+        'jealousy',
+        'knowledge',
+        'leadership',
+        'learning',
+        'legal',
+        'life',
+        'loneliness',
+        'love',
+        'marriage',
+        'medical',
+        'men',
+        'mom',
+        'money',
+        'morning',
+        'motivation',
+        'movies',
+        'moving on',
+        'music',
+        'nature',
+        'parenting',
+        'patience',
+        'patriotism',
+        'peace',
+        'pet',
+        'poetry',
+        'politics',
+        'positive',
+        'power',
+        'relationship',
+        'religion',
+        'respect',
+        'romantic',
+        'saadi',
+        'sad',
+        'science',
+        'seal',
+        'smile',
+        'society',
+        'sports',
+        'strength',
+        'success',
+        'sympathy',
+        'teacher',
+        'technology',
+        'teen',
+        'thankful',
+        'thanksgiving',
+        'time',
+        'travel',
+        'trust',
+        'truth',
+        'war',
+        'wedding',
+        'wisdom',
+        'women',
+        'work'
+    ];
+    protected $authors;
 
     /**
      * QuotesFromJson constructor.
-     *
-     * @param \Quoterr\Helpers\TagExtractor $tagExtractor
      */
-    public function __construct(TagExtractor $tagExtractor)
+    public function __construct()
     {
         parent::__construct();
-        $this->tagExtractor = $tagExtractor;
+        $this->ignore = array_flip($this->ignore);
     }
 
     /**
@@ -54,39 +168,38 @@ class QuotesFromJson extends Command
     {
         $filename = $this->argument('filename');
         $stream = fopen($filename, 'r');
+        $this->user = User::whereEmail('bot@quoterr.me')->first();
         try {
-            $listener = new StreamingJsonListener(function ($entry){
+            $listener = new StreamingJsonListener(function ($entry) {
                 $name = $this->clean($entry['author']);
-                if (!str_contains('Quote', $name) && count(explode(' ', $name)) >= 2) {
+                if (array_has($this->ignore, strtolower($name)) || str_contains(strtolower($name), 'quote')) {
+//                    $quote = $this->clean($entry['text']);
+//                    $this->output->write("{$this->count}: {$name} ");
+//                    $this->error("{$quote}");
+                } else {
                     $author = Author::firstOrCreate(['name' => $name]);
+                    if (!array_has($this->authors, strtolower($name))) {
+                        $this->info($name);
+                        $this->authors[strtolower($name)] = true;
+                    }
                     $quote = $this->clean($entry['text']);
                     $q = new Quote([
                         'content'   => $quote,
-                        'user_id'   => 1,
+                        'user_id'   => $this->user->id,
                         'author_id' => $author->id,
                         'published' => true
                     ]);
                     if ($q->save()) {
-                        $tags = $this->tagExtractor->getTags($q->content);
-                        foreach ($tags as $tag) {
-                            $t = Tag::whereSlug(str_slug($tag))->first();
-                            if (!$t) {
-                                $t = Tag::create(['name' => $tag]);
-                            }
-                            $t->quotes()->attach($q->id);
-                        }
                         $this->count++;
-                        $this->output->writeln("{$this->count}: <info>{$quote}</info>");
+//                        $this->output->writeln("{$this->count}: {$name} <info>{$quote}</info>");
                     } else {
-                        $this->output->writeln("{$this->count}: <error>{$quote}</error>");
+//                        $this->output->write("{$this->count}: {$name} ");
+//                        $this->warn("{$quote}");
                     }
-                } else {
-                    $this->classes[$name] = true;
                 }
             });
             $parser = new \JsonStreamingParser_Parser($stream, $listener);
             $parser->parse();
-            \File::put(base_path('classes.txt'), implode('\n', array_keys($this->classes)));
             $this->info("{$this->count} quotes pushed.");
         } catch (\JsonStreamingParser_ParsingError $e) {
             fclose($stream);
