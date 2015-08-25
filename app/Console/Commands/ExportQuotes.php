@@ -34,12 +34,16 @@ class ExportQuotes extends Command
         $filename = $this->argument('filename') ?: 'quotes.json';
         $fp = fopen($filename, 'w');
         fwrite($fp, '[');
-        Quote::chunk(100, function (Quote $quote) use ($fp) {
-            if (!$this->count) {
-                fwrite($fp, ',');
+        $this->info('Exporting quotes...');
+        Quote::chunk(100, function ($quotes) use ($fp) {
+            foreach ($quotes as $quote) {
+                if ($this->count > 0) {
+                    fwrite($fp, ',');
+                }
+                fwrite($fp, json_encode(['text' => $quote->content, 'author' => $quote->author->name]));
+                $this->count++;
             }
-            fwrite($fp, json_encode(['text' => $quote->content, 'author' => $quote->author->name]));
-            $this->count++;
+            $this->info("Exported {$this->count} quotes.");
         });
         fwrite($fp, ']');
         fclose($fp);

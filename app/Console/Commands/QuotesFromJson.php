@@ -173,13 +173,12 @@ class QuotesFromJson extends Command
             $listener = new StreamingJsonListener(function ($entry) {
                 $name = $this->clean($entry['author']);
                 if (array_has($this->ignore, strtolower($name)) || str_contains(strtolower($name), 'quote')) {
-//                    $quote = $this->clean($entry['text']);
-//                    $this->output->write("{$this->count}: {$name} ");
-//                    $this->error("{$quote}");
+                    $quote = $this->clean($entry['text']);
+                    $this->output->write("{$this->count}: {$name} ");
+                    $this->error("{$quote}");
                 } else {
                     $author = Author::firstOrCreate(['name' => $name]);
                     if (!array_has($this->authors, strtolower($name))) {
-                        $this->info($name);
                         $this->authors[strtolower($name)] = true;
                     }
                     $quote = $this->clean($entry['text']);
@@ -191,10 +190,10 @@ class QuotesFromJson extends Command
                     ]);
                     if ($q->save()) {
                         $this->count++;
-//                        $this->output->writeln("{$this->count}: {$name} <info>{$quote}</info>");
+                        $this->output->writeln("{$this->count}: {$name} <info>{$quote}</info>");
                     } else {
-//                        $this->output->write("{$this->count}: {$name} ");
-//                        $this->warn("{$quote}");
+                        $this->output->write("{$this->count}: {$name} ");
+                        $this->warn("{$quote}");
                     }
                 }
             });
