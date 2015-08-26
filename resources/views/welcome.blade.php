@@ -7,7 +7,9 @@
 @section('meta')
     @parent
     <meta name="title" content="{{ $meta['title'] }}">
+    <meta name="og:title" content="{{ $meta['title'] }}">
     <meta name="description" content="{{ $meta['description'] }}">
+    <meta name="og:description" content="{{ $meta['description'] }}">
 @endsection
 
 @section('header')

@@ -1,13 +1,13 @@
 @section('header')
-    @include('partial.header')
+@include('partial.header')
 @endsection
 @section('footer')
-    @include('partial.footer')
+@include('partial.footer')
 @endsection
 @section('meta')
-    @include('partial.meta')
+@include('partial.meta')
 @endsection
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -15,14 +15,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Quoterr</title>
 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta property="og:image" content="{{ asset('img/banner.jpg') }}"/>
     @yield('meta')
 
+    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/png">
     <link rel="author" href={{ url('humans.txt') }}>
     <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     @yield('css')
-    <style>.alert{ margin-bottom: 0}</style>
+    <style>.alert {
+            margin-bottom: 0
+        }</style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
