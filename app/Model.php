@@ -1,5 +1,6 @@
 <?php namespace Quoterr;
 
+use DB;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
