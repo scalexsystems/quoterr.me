@@ -141,4 +141,17 @@ abstract class Model extends Eloquent
     {
         static::registerModelEvent('validating', $callable, $priority);
     }
+
+    public function scopeOrderByRandom(Builder $query)
+    {
+        switch ($this->getConnection()->getDriverName()) {
+            case 'pgsql':
+            case 'sqlite':
+                $query->orderBy(DB::raw('random()'));
+                break;
+            case 'mysql':
+                $query->orderBy(DB::raw('rand()'));
+                break;
+        }
+    }
 }
