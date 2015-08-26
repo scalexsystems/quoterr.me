@@ -172,7 +172,7 @@
 @section('body.js')
     <script src="{{ asset('js/screenfull.js') }}"></script>
     <script src="{{ asset('js/nprogress.js') }}"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.10/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.12.10/vue.min.js"></script>
     <script>
         NProgress.configure({ showSpinner: false });
         var v = new Vue({
