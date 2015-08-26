@@ -46,7 +46,9 @@ class QuoteController extends Controller
         foreach ($quotes as $quote) {
             $quote->content = $this->highlight($quote->content, $q);
         }
+
         $quotes->load(['author']);
+        $quotes->appends(\Input::except('page'));
 
 
         return view('quote.index', compact('authors', 'tags', 'quotes', 'q'));

@@ -1,8 +1,11 @@
 @section('header')
-        @include('partial.header')
+    @include('partial.header')
 @endsection
 @section('footer')
-        @include('partial.footer')
+    @include('partial.footer')
+@endsection
+@section('meta')
+    @include('partial.meta')
 @endsection
 <!DOCTYPE html>
 <html lang="en">
