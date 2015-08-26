@@ -4,6 +4,11 @@
     <link rel="stylesheet" href="{{ asset('css/nprogress.css') }}">
 @endsection
 
+@section('meta')
+    @parent
+    <meta name="title" content="{{ $meta['title'] }}">
+    <meta name="description" content="{{ $meta['description'] }}">
+@endsection
 
 @section('header')
 @endsection
