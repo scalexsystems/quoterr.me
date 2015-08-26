@@ -24,7 +24,7 @@ class WelcomeController extends Controller
         $quote = null;
         $meta = [
             'title'       => 'Quoterr',
-            'description' => "A fine quotation is a diamond in the hand of a man of wit, and a pebble in the hand of a fool. Read awesome quotes on Quoterr.",
+            'description' => "Quoterr.me is an experience.",
         ];
         $api = '/api/quotes?random=1';
         if ($query !== null) {
@@ -40,7 +40,7 @@ class WelcomeController extends Controller
                     $type = "Showing quotes by {$author->name}";
                     $quote = $author->quotes()->published()->orderByRandom()->first();
                     $api = '/api/author?id=' . $query;
-                    $meta['title'] = "Quote by {$quote->author->name} on Quoterr";
+                    $meta['title'] = "Quotes by {$quote->author->name} on Quoterr";
                     $meta['description'] = "A fine quotation is a diamond in the hand of a man of wit, and a pebble in the hand of a fool. Read awesome quotes on Quoterr.";
                 } else {
                     $tag = Tag::whereSlug($query)->first();
