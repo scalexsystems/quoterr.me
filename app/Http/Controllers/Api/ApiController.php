@@ -17,14 +17,6 @@ class ApiController extends Controller
 
     use Helpers;
 
-    /**
-     * ApiController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('cors');
-    }
-
     public function quotes(Request $request)
     {
         $limit = $this->getLimit($request);

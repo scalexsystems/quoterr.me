@@ -15,7 +15,7 @@ Route::get('/{quote?}', ['as' => 'home', 'uses' => 'WelcomeController@index']);
 
 $api = Api::router();
 
-$api->version('v1', [], function ($api) {
+$api->version('v1', ['middleware' => 'cors'], function ($api) {
     $api->get('quotes', ['as' => 'quotes', 'uses' => 'Quoterr\Http\Controllers\Api\ApiController@quotes']);
     $api->get('authors', ['as' => 'authors', 'uses' => 'Quoterr\Http\Controllers\Api\ApiController@authors']);
     $api->get('quote', ['as' => 'quote', 'uses' => 'Quoterr\Http\Controllers\Api\ApiController@quote']);
