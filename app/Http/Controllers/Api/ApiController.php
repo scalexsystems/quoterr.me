@@ -14,7 +14,16 @@ use Quoterr\Transformers\Quote as QuoteTransformer;
 
 class ApiController extends Controller
 {
+
     use Helpers;
+
+    /**
+     * ApiController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('cors');
+    }
 
     public function quotes(Request $request)
     {
@@ -38,7 +47,7 @@ class ApiController extends Controller
             $quote = Quote::published()->whereUuid($request->get('uuid'))->first();
         }
 
-        if (!isset($quote)) {
+        if (! isset( $quote )) {
             $quote = Quote::published()->orderByRandom()->first();
         }
 
@@ -51,7 +60,7 @@ class ApiController extends Controller
         /** @type Tag $tag */
         $tag = Tag::whereSlug($request->get('id'))->first();
 
-        if (!$tag) {
+        if (! $tag) {
             return $this->response()->noContent();
         }
 
@@ -65,8 +74,8 @@ class ApiController extends Controller
         $limit = $this->getLimit($request);
         $author_id = $request->get('id', 0);
         /** @type Author $author */
-        $author = Author::whereId((int)$author_id)->orWhere('slug', $author_id)->first();
-        if (!$author) {
+        $author = Author::whereId((int) $author_id)->orWhere('slug', $author_id)->first();
+        if (! $author) {
             return $this->response()->noContent();
         }
         $quotes = $author->quotes()->published()->orderBy('quotes.created_at', 'desc')->paginate($limit);
@@ -93,7 +102,6 @@ class ApiController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     *
      * @return mixed
      */
     protected function getLimit(Request $request)
